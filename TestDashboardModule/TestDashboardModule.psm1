@@ -4,7 +4,7 @@ function New-TestDashboard {
         [Parameter(Mandatory=$true, ValueFromPipeline=$true)]
         [string]$InputXml,
 
-        [string]$TemplatePath = "dashboard-template.eps",
+        [string]$TemplatePath = ".\dashboard-template.eps",
 
         [Parameter(Mandatory=$true)]
         [string]$OutputPath
@@ -122,11 +122,13 @@ function New-TestDashboard {
         GeneratedDate = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     }
 
+    $bindings = @{
+        data = $data
+    }
+
     # Generate HTML from template
-    Invoke-EpsTemplate -Path $TemplatePath -Binding $data | Out-File $OutputPath -Encoding UTF8
+    Invoke-EpsTemplate -Path $TemplatePath -Binding $bindings | Out-File $OutputPath -Encoding UTF8
 
     Write-Verbose "Dashboard generated: $OutputPath"
     return $OutputPath
 }
-
-Export-ModuleMember -Function New-TestDashboard

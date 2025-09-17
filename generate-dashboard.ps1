@@ -119,7 +119,11 @@ $data = @{
     GeneratedDate = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
 }
 
+$bindings = @{
+    data = $data
+}
+
 # Generate HTML from template
-Invoke-EpsTemplate -Path $TemplatePath -Binding $data | Out-File $OutputPath -Encoding UTF8
+Invoke-EpsTemplate -Path $TemplatePath -Binding $bindings | Out-File $OutputPath -Encoding UTF8
 
 Write-Host "Dashboard generated: $OutputPath"
