@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="18" errors="0" failures="9" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2025-09-16" time="16:09:55">
+  <environment platform="Microsoft Windows 11 Enterprise|C:\WINDOWS|\Device\Harddisk5\Partition3" user-domain="THEHUNTZMAN" clr-version="9.0.4" os-version="10.0.26100" cwd="G:\Users\TheHuntzman\Downloads\reportunit.1.5.0-beta1\tools" nunit-version="2.5.8.0" machine-name="CENTURION" user="TheHuntzman" />
+  <culture-info current-culture="en-US" current-uiculture="en-US" />
+  <test-suite type="TestFixture" name="Pester" executed="True" result="Failure" success="False" time="0.4532" asserts="0" description="Pester">
+    <results>
+      <test-suite type="TestFixture" name="G:\Users\TheHuntzman\Downloads\reportunit.1.5.0-beta1\tools\demo.tests.ps1" executed="True" result="Success" success="True" time="0.0737" asserts="0" description="G:\Users\TheHuntzman\Downloads\reportunit.1.5.0-beta1\tools\demo.tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="Add-Numbers Function Tests" executed="True" result="Success" success="True" time="0.0298" asserts="0" description="Add-Numbers Function Tests">
+            <results>
+              <test-suite type="TestFixture" name="Add-Numbers Function Tests.When adding positive numbers" executed="True" result="Success" success="True" time="0.0131" asserts="0" description="Add-Numbers Function Tests.When adding positive numbers">
+                <results>
+                  <test-case description="Should return the correct sum for 2 + 3" name="Add-Numbers Function Tests.When adding positive numbers.Should return the correct sum for 2 + 3" time="0.0074" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Should return the correct sum for 10 + 20" name="Add-Numbers Function Tests.When adding positive numbers.Should return the correct sum for 10 + 20" time="0.0016" asserts="0" success="True" result="Success" executed="True" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="Add-Numbers Function Tests.When adding negative numbers" executed="True" result="Success" success="True" time="0.0196" asserts="0" description="Add-Numbers Function Tests.When adding negative numbers">
+                <results>
+                  <test-case description="Should return the correct sum for -1 + -2" name="Add-Numbers Function Tests.When adding negative numbers.Should return the correct sum for -1 + -2" time="0.0022" asserts="0" success="True" result="Success" executed="True" />
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="Add-Numbers Function Tests.When adding mixed numbers" executed="True" result="Success" success="True" time="0.0257" asserts="0" description="Add-Numbers Function Tests.When adding mixed numbers">
+                <results>
+                  <test-case description="Should return the correct sum for 5 + -3" name="Add-Numbers Function Tests.When adding mixed numbers.Should return the correct sum for 5 + -3" time="0.0021" asserts="0" success="True" result="Success" executed="True" />
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+      <test-suite type="TestFixture" name="G:\Users\TheHuntzman\Downloads\reportunit.1.5.0-beta1\tools\infrastructure.tests.ps1" executed="True" result="Failure" success="False" time="0.2941" asserts="0" description="G:\Users\TheHuntzman\Downloads\reportunit.1.5.0-beta1\tools\infrastructure.tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="IT Infrastructure Health Checks" executed="True" result="Failure" success="False" time="0.1704" asserts="0" description="IT Infrastructure Health Checks">
+            <results>
+              <test-suite type="TestFixture" name="IT Infrastructure Health Checks.Disk Space Checks" executed="True" result="Failure" success="False" time="0.0354" asserts="0" description="IT Infrastructure Health Checks.Disk Space Checks">
+                <results>
+                  <test-case description="Should have more than 10GB free on C: drive" name="IT Infrastructure Health Checks.Disk Space Checks.Should have more than 10GB free on C: drive" time="0.0164" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Should have more than 10GB free on D: drive" name="IT Infrastructure Health Checks.Disk Space Checks.Should have more than 10GB free on D: drive" time="0.0147" asserts="0" success="False" result="Failure" executed="True">
+                    <failure>
+                      <message>Expected the actual value to be greater than 10737418240, but got 5368709120.</message>
+                      <stack-trace>at $freeSpace | Should -BeGreaterThan 10GB  # This will fail, only 5GB, G:\Users\TheHuntzman\Downloads\reportunit.1.5.0-beta1\tools\infrastructure.tests.ps1:46
+at &lt;ScriptBlock&gt;, G:\Users\TheHuntzman\Downloads\reportunit.1.5.0-beta1\tools\infrastructure.tests.ps1:46</stack-trace>
+                    </failure>
+                  </test-case>
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="IT Infrastructure Health Checks.Service Status Checks" executed="True" result="Failure" success="False" time="0.0837" asserts="0" description="IT Infrastructure Health Checks.Service Status Checks">
+                <results>
+                  <test-case description="Should have Spooler service running" name="IT Infrastructure Health Checks.Service Status Checks.Should have Spooler service running" time="0.0216" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Should have W32Time service running" name="IT Infrastructure Health Checks.Service Status Checks.Should have W32Time service running" time="0.0226" asserts="0" success="False" result="Failure" executed="True">
+                    <failure>
+                      <message>Expected strings to be the same, but they were different.
+String lengths are both 7.
+Strings differ at index 0.
+Expected: 'Running'
+But was:  'Stopped'
+           ^</message>
+                      <stack-trace>at $status | Should -Be 'Running'  # This will fail, it's stopped, G:\Users\TheHuntzman\Downloads\reportunit.1.5.0-beta1\tools\infrastructure.tests.ps1:58
+at &lt;ScriptBlock&gt;, G:\Users\TheHuntzman\Downloads\reportunit.1.5.0-beta1\tools\infrastructure.tests.ps1:58</stack-trace>
+                    </failure>
+                  </test-case>
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="IT Infrastructure Health Checks.Network Connectivity Checks" executed="True" result="Failure" success="False" time="0.1176" asserts="0" description="IT Infrastructure Health Checks.Network Connectivity Checks">
+                <results>
+                  <test-case description="Should be able to ping google.com" name="IT Infrastructure Health Checks.Network Connectivity Checks.Should be able to ping google.com" time="0.0149" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Should be able to ping nonexistent.example" name="IT Infrastructure Health Checks.Network Connectivity Checks.Should be able to ping nonexistent.example" time="0.015" asserts="0" success="False" result="Failure" executed="True">
+                    <failure>
+                      <message>Expected $true, but got $false.</message>
+                      <stack-trace>at $result | Should -Be $true  # This will fail, it's false, G:\Users\TheHuntzman\Downloads\reportunit.1.5.0-beta1\tools\infrastructure.tests.ps1:70
+at &lt;ScriptBlock&gt;, G:\Users\TheHuntzman\Downloads\reportunit.1.5.0-beta1\tools\infrastructure.tests.ps1:70</stack-trace>
+                    </failure>
+                  </test-case>
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="IT Infrastructure Health Checks.System Uptime Check" executed="True" result="Failure" success="False" time="0.1526" asserts="0" description="IT Infrastructure Health Checks.System Uptime Check">
+                <results>
+                  <test-case description="Should have system uptime greater than 1 hour" name="IT Infrastructure Health Checks.System Uptime Check.Should have system uptime greater than 1 hour" time="0.0153" asserts="0" success="True" result="Success" executed="True" />
+                  <test-case description="Should have system uptime greater than 24 hours" name="IT Infrastructure Health Checks.System Uptime Check.Should have system uptime greater than 24 hours" time="0.0155" asserts="0" success="False" result="Failure" executed="True">
+                    <failure>
+                      <message>Expected the actual value to be greater than 24, but got 2.</message>
+                      <stack-trace>at $uptime.TotalHours | Should -BeGreaterThan 24  # This will fail, G:\Users\TheHuntzman\Downloads\reportunit.1.5.0-beta1\tools\infrastructure.tests.ps1:83
+at &lt;ScriptBlock&gt;, G:\Users\TheHuntzman\Downloads\reportunit.1.5.0-beta1\tools\infrastructure.tests.ps1:83</stack-trace>
+                    </failure>
+                  </test-case>
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+      <test-suite type="TestFixture" name="G:\Users\TheHuntzman\Downloads\reportunit.1.5.0-beta1\tools\notworking.tests.ps1" executed="True" result="Failure" success="False" time="0.0853" asserts="0" description="G:\Users\TheHuntzman\Downloads\reportunit.1.5.0-beta1\tools\notworking.tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="Failing Tests Demo" executed="True" result="Failure" success="False" time="0.0427" asserts="0" description="Failing Tests Demo">
+            <results>
+              <test-suite type="TestFixture" name="Failing Tests Demo.Tests that should pass but are written to fail" executed="True" result="Failure" success="False" time="0.0146" asserts="0" description="Failing Tests Demo.Tests that should pass but are written to fail">
+                <results>
+                  <test-case description="Should return 6 for 2 + 3 (but expects wrong value)" name="Failing Tests Demo.Tests that should pass but are written to fail.Should return 6 for 2 + 3 (but expects wrong value)" time="0.0046" asserts="0" success="False" result="Failure" executed="True">
+                    <failure>
+                      <message>Expected 6, because test, but got 5.</message>
+                      <stack-trace>at Add-Numbers 2 3 | Should -Be 6 -Because "test"  # This will fail, actual is 5, G:\Users\TheHuntzman\Downloads\reportunit.1.5.0-beta1\tools\notworking.tests.ps1:18
+at &lt;ScriptBlock&gt;, G:\Users\TheHuntzman\Downloads\reportunit.1.5.0-beta1\tools\notworking.tests.ps1:18</stack-trace>
+                    </failure>
+                  </test-case>
+                  <test-case description="Is a test" name="Failing Tests Demo.Tests that should pass but are written to fail.Is a test" time="0.0025" asserts="0" success="False" result="Failure" executed="True">
+                    <failure>
+                      <message>RuntimeException: This test is designed to fail</message>
+                      <stack-trace>at &lt;ScriptBlock&gt;, G:\Users\TheHuntzman\Downloads\reportunit.1.5.0-beta1\tools\notworking.tests.ps1:22</stack-trace>
+                    </failure>
+                  </test-case>
+                  <test-case description="Should return 25 for 10 + 20 (but expects wrong value)" name="Failing Tests Demo.Tests that should pass but are written to fail.Should return 25 for 10 + 20 (but expects wrong value)" time="0.003" asserts="0" success="False" result="Failure" executed="True">
+                    <failure>
+                      <message>Expected 25, but got 30.</message>
+                      <stack-trace>at Add-Numbers 10 20 | Should -Be 25  # This will fail, actual is 30, G:\Users\TheHuntzman\Downloads\reportunit.1.5.0-beta1\tools\notworking.tests.ps1:26
+at &lt;ScriptBlock&gt;, G:\Users\TheHuntzman\Downloads\reportunit.1.5.0-beta1\tools\notworking.tests.ps1:26</stack-trace>
+                    </failure>
+                  </test-case>
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="Failing Tests Demo.Tests with incorrect logic" executed="True" result="Failure" success="False" time="0.0266" asserts="0" description="Failing Tests Demo.Tests with incorrect logic">
+                <results>
+                  <test-case description="Should handle negative numbers incorrectly" name="Failing Tests Demo.Tests with incorrect logic.Should handle negative numbers incorrectly" time="0.0041" asserts="0" success="False" result="Failure" executed="True">
+                    <failure>
+                      <message>Expected '-5', but got -3.</message>
+                      <stack-trace>at Add-Numbers -1 -2 | Should -Be -5  # This will fail, actual is -3, G:\Users\TheHuntzman\Downloads\reportunit.1.5.0-beta1\tools\notworking.tests.ps1:32
+at &lt;ScriptBlock&gt;, G:\Users\TheHuntzman\Downloads\reportunit.1.5.0-beta1\tools\notworking.tests.ps1:32</stack-trace>
+                    </failure>
+                  </test-case>
+                  <test-case description="Should fail for mixed numbers" name="Failing Tests Demo.Tests with incorrect logic.Should fail for mixed numbers" time="0.0036" asserts="0" success="False" result="Failure" executed="True">
+                    <failure>
+                      <message>Expected 10, but got 2.</message>
+                      <stack-trace>at Add-Numbers 5 -3 | Should -Be 10  # This will fail, actual is 2, G:\Users\TheHuntzman\Downloads\reportunit.1.5.0-beta1\tools\notworking.tests.ps1:36
+at &lt;ScriptBlock&gt;, G:\Users\TheHuntzman\Downloads\reportunit.1.5.0-beta1\tools\notworking.tests.ps1:36</stack-trace>
+                    </failure>
+                  </test-case>
+                </results>
+              </test-suite>
+              <test-suite type="TestFixture" name="Failing Tests Demo.A test that passes" executed="True" result="Success" success="True" time="0.0333" asserts="0" description="Failing Tests Demo.A test that passes">
+                <results>
+                  <test-case description="Should correctly add 0 + 0" name="Failing Tests Demo.A test that passes.Should correctly add 0 + 0" time="0.0022" asserts="0" success="True" result="Success" executed="True" />
+                </results>
+              </test-suite>
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>
