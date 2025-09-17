@@ -6,6 +6,7 @@
     Copyright         = '(c) 2025 Skryptek, LLC. All rights reserved.'
     Description       = 'Module for generating test dashboards from NUnit XML.'
     PowerShellVersion = '5.1'
+    RequiredModules   = @('EPS')
     FunctionsToExport = @('New-TestDashboard')
     CmdletsToExport   = @()
     VariablesToExport = @()
