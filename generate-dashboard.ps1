@@ -5,9 +5,9 @@
 # Requires EPS module: Install-Module -Name EPS
 
 param(
-    [string]$XmlFilePath = "test-results.xml",
-    [string]$TemplatePath = "dashboard-template.eps",
-    [string]$OutputPath = "test-dashboard.html"
+    [string]$XmlFilePath = ".\test-results.xml",
+    [string]$TemplatePath = ".\dashboard-template.eps",
+    [string]$OutputPath = ".\test-dashboard.html"
 )
 
 # Load EPS module
