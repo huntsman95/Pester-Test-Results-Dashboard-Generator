@@ -10,7 +10,6 @@
         body { background-color: #f8f9fa; }
         .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 3rem 0; margin-bottom: 2rem; }
         .card { border: none; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.2s; }
-        
         .card-body { padding: 2rem; }
         .progress { height: 30px; border-radius: 15px; }
         .table { border-radius: 10px; overflow: hidden; }
@@ -28,6 +27,7 @@
         .card .card-header { border-radius: 10px 10px 0 0; }
         .card .collapse:not(.show) + .card-body { display: none; }
         .card:has(.collapse:not(.show)) .card-header { border-radius: 10px; }
+        .statusbadge { top: 2px !important; right: 16px; }
     </style>
 </head>
 <body>
@@ -131,9 +131,9 @@
                     <button class="btn btn-link text-white text-decoration-none w-100 text-start collapse-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#<%= $collapseId %>" aria-expanded="false" aria-controls="<%= $collapseId %>">
                         <i class="fas fa-folder me-2"></i><%= $main.Name %> (<%= $main.TotalCount %>)
                         <div class="float-end d-flex align-items-center gap-2">
-                            <span class="badge bg-success"><%= $main.PassedCount %> Passed</span>
+                            <span class="badge statusbadge bg-success"><%= $main.PassedCount %> Passed</span>
                             <% if ($main.FailedCount -gt 0) { %>
-                            <span class="badge <%= if ($main.HasFailures) { 'bg-light text-danger' } else { 'bg-danger' } %>"><%= $main.FailedCount %> Failed</span>
+                            <span class="badge statusbadge <%= if ($main.HasFailures) { 'bg-light text-danger' } else { 'bg-danger' } %>"><%= $main.FailedCount %> Failed</span>
                             <% } %>
                             <i class="fas fa-chevron-down"></i>
                         </div>
