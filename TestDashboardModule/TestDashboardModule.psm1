@@ -1,14 +1,18 @@
 function New-TestDashboard {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory=$true, ValueFromPipeline=$true)]
+        [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
         [string]$InputXml,
 
-        [string]$TemplatePath = ".\dashboard-template.eps",
-
-        [Parameter(Mandatory=$true)]
-        [string]$OutputPath
+        [Parameter(Mandatory = $true)]
+        [string]$OutputPath,
+        
+        [string]$TemplatePath = '<USE BUILT-IN TEMPLATE>'
     )
+
+    if ($TemplatePath -eq '<USE BUILT-IN TEMPLATE>') {
+        $TemplatePath = Join-Path -Path $PSScriptRoot -ChildPath 'Templates/dashboard-template.eps'
+    }
 
     # Load EPS module
     Import-Module EPS
@@ -33,25 +37,25 @@ function New-TestDashboard {
     $passedTests = $totalTests - $failedTests - $skippedTests - $errors
 
     # Get individual test cases
-    $testCases = $xml.SelectNodes("//test-case") | ForEach-Object {
+    $testCases = $xml.SelectNodes('//test-case') | ForEach-Object {
         $parts = $_.name -split '\.'
         $mainCategory = $parts[0]
-        $subCategory = if ($parts.Count -ge 2) { $parts[1] } else { "General" }
+        $subCategory = if ($parts.Count -ge 2) { $parts[1] } else { 'General' }
         $failureMessage = if ($_.failure) { $_.failure.message } else { $null }
         $testStackTrace = if ($_.failure) { $_.failure.'stack-trace' } else { $null }
         [PSCustomObject]@{
-            FullName = $_.name
-            DisplayName = if ($_.description) { $_.description } else { $_.name }
-            Result = switch ($_.result) {
-                "Success" { "Passed" }
-                "Failure" { "Failed" }
+            FullName       = $_.name
+            DisplayName    = if ($_.description) { $_.description } else { $_.name }
+            Result         = switch ($_.result) {
+                'Success' { 'Passed' }
+                'Failure' { 'Failed' }
                 default { $_.result }
             }
-            Time = [double]$_.time
-            MainCategory = $mainCategory
-            SubCategory = $subCategory
+            Time           = [double]$_.time
+            MainCategory   = $mainCategory
+            SubCategory    = $subCategory
             FailureMessage = $failureMessage
-            StackTrace = $testStackTrace
+            StackTrace     = $testStackTrace
         }
     }
 
@@ -62,33 +66,33 @@ function New-TestDashboard {
     $globalTestCounter = 0
     $mainCategoriesWithStats = $mainCategories | ForEach-Object {
         $categoryTests = $_.Group
-        $passedCount = ($categoryTests | Where-Object { $_.Result -eq "Passed" }).Count
-        $failedCount = ($categoryTests | Where-Object { $_.Result -eq "Failed" }).Count
+        $passedCount = ($categoryTests | Where-Object { $_.Result -eq 'Passed' }).Count
+        $failedCount = ($categoryTests | Where-Object { $_.Result -eq 'Failed' }).Count
         $hasFailures = $failedCount -gt 0
 
         # Assign test IDs to all tests in this category
         $testsWithIds = $categoryTests | ForEach-Object {
             $globalTestCounter++
             [PSCustomObject]@{
-                FullName = $_.FullName
-                DisplayName = $_.DisplayName
-                Result = $_.Result
-                Time = $_.Time
-                MainCategory = $_.MainCategory
-                SubCategory = $_.SubCategory
+                FullName       = $_.FullName
+                DisplayName    = $_.DisplayName
+                Result         = $_.Result
+                Time           = $_.Time
+                MainCategory   = $_.MainCategory
+                SubCategory    = $_.SubCategory
                 FailureMessage = $_.FailureMessage
-                StackTrace = $_.StackTrace
-                TestId = "test-" + $globalTestCounter
+                StackTrace     = $_.StackTrace
+                TestId         = 'test-' + $globalTestCounter
             }
         }
 
         [PSCustomObject]@{
-            Name = $_.Name
-            Group = $testsWithIds
+            Name        = $_.Name
+            Group       = $testsWithIds
             PassedCount = $passedCount
             FailedCount = $failedCount
             HasFailures = $hasFailures
-            TotalCount = $_.Count
+            TotalCount  = $_.Count
         }
     }
 
@@ -96,15 +100,15 @@ function New-TestDashboard {
     $failedTestsSummary = @()
     foreach ($category in $mainCategoriesWithStats) {
         if ($category.HasFailures) {
-            $failedTestsInCategory = $category.Group | Where-Object { $_.Result -eq "Failed" }
+            $failedTestsInCategory = $category.Group | Where-Object { $_.Result -eq 'Failed' }
             foreach ($failedTest in $failedTestsInCategory) {
                 $failedTestsSummary += [PSCustomObject]@{
-                    TestName = $failedTest.DisplayName
-                    CategoryName = $category.Name
-                    CategoryId = "collapse-" + $category.Name.Replace(" ", "").Replace(".", "")
-                    TestId = $failedTest.TestId
+                    TestName       = $failedTest.DisplayName
+                    CategoryName   = $category.Name
+                    CategoryId     = 'collapse-' + $category.Name.Replace(' ', '').Replace('.', '')
+                    TestId         = $failedTest.TestId
                     FailureMessage = $failedTest.FailureMessage
-                    StackTrace = $failedTest.StackTrace
+                    StackTrace     = $failedTest.StackTrace
                 }
             }
         }
@@ -112,14 +116,14 @@ function New-TestDashboard {
 
     # Prepare data for template
     $data = @{
-        TotalTests = $totalTests
-        PassedTests = $passedTests
-        FailedTests = $failedTests
-        SkippedTests = $skippedTests
-        PassRate = if ($totalTests -gt 0) { [math]::Round(($passedTests / $totalTests) * 100, 2) } else { 0 }
-        MainCategories = $mainCategoriesWithStats
+        TotalTests         = $totalTests
+        PassedTests        = $passedTests
+        FailedTests        = $failedTests
+        SkippedTests       = $skippedTests
+        PassRate           = if ($totalTests -gt 0) { [math]::Round(($passedTests / $totalTests) * 100, 2) } else { 0 }
+        MainCategories     = $mainCategoriesWithStats
         FailedTestsSummary = $failedTestsSummary
-        GeneratedDate = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+        GeneratedDate      = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
     }
 
     $bindings = @{
